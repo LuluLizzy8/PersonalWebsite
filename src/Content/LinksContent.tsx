@@ -10,7 +10,7 @@ export default function LinksContent() {
           className="flex flex-col items-center hover:scale-105 transition"
         >
           <img
-            src="/GithubIcon.png"
+            src="./GithubIcon.png"
             alt="Github Icon"
             className="w-14 h-14 mb-2"
           />
@@ -25,7 +25,7 @@ export default function LinksContent() {
           className="flex flex-col items-center hover:scale-105 transition"
         >
           <img
-            src="/LinkedinIcon.png"
+            src="./LinkedinIcon.png"
             alt="Linkedin Icon"
             className="w-14 h-14 mb-2"
           />
@@ -40,7 +40,7 @@ export default function LinksContent() {
           className="flex flex-col items-center hover:scale-105 transition"
         >
           <img
-            src="/InstagramIcon.png"
+            src="./InstagramIcon.png"
             alt="Instagram Icon"
             className="w-14 h-14 mb-2"
           />
@@ -54,7 +54,7 @@ export default function LinksContent() {
           className="flex flex-col items-center hover:scale-105 transition"
         >
           <img
-            src="/ComingSoonIcon.jpg"
+            src="./ComingSoonIcon.jpg"
             alt="YouTube Icon"
             className="w-14 h-14 mb-2"
           />
@@ -68,7 +68,7 @@ export default function LinksContent() {
           className="flex flex-col items-center hover:scale-105 transition"
         >
           <img
-            src="/ComingSoonIcon.jpg"
+            src="./ComingSoonIcon.jpg"
             alt="TikTok Icon"
             className="w-14 h-14 mb-2"
           />
@@ -82,7 +82,7 @@ export default function LinksContent() {
           className="flex flex-col items-center hover:scale-105 transition"
         >
           <img
-            src="/ComingSoonIcon.jpg"
+            src="./ComingSoonIcon.jpg"
             alt="Xiaohongshu Icon"
             className="w-14 h-14 mb-2"
           />
