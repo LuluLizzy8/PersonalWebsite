@@ -33,7 +33,7 @@ export default function AboutContent() {
       {/* Scrollable text content */}
       <div className="flex-1 overflow-y-auto p-4 text-gray-700 space-y-4">
         <p>
-          I'm a computer science master's student at Columbia
+          I&apos;m a computer science master&apos;s student at Columbia
           University with a passion for blending artificial intelligence,
           design, and human-centered engineering. I enjoy exploring how
           technology can create experiences that are both functional and

@@ -21,13 +21,10 @@ export default function Home() {
   const isMobile = !useMediaQuery("(min-width: 640px)");
   //Stack Order
   const [zOrder, setZOrder] = useState<{ [key: string]: number }>({});
-  const [currentTopZ, setCurrentTopZ] = useState(100);
+  const topZRef = useRef(100);
   const activateWindow = (name: string) => {
-    setCurrentTopZ((prev) => {
-      const newZ = prev + 1;
-      setZOrder((old) => ({ ...old, [name]: newZ }));
-      return newZ;
-    });
+    topZRef.current += 1;
+    setZOrder((old) => ({ ...old, [name]: topZRef.current }));
   };
 
   return (
@@ -57,7 +54,7 @@ export default function Home() {
         {/* Inner content */}
         <div className="flex flex-col items-center justify-center flex-1 p-8">
           <h1 className="text-5xl text-[#FFCAD4] font-bold mb-2">
-            hi! i'm lizzy
+            hi! i&apos;m lizzy
           </h1>
           <p className="text-gray-600 mb-6 text-center">
             MCS Student at Columbia

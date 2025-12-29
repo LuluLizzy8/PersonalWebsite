@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useDragControls, vw } from "framer-motion";
+import { motion, useDragControls } from "framer-motion";
 import React from "react";
 
 interface DraggableWindowProps {
