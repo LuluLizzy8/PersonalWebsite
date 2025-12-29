@@ -1,18 +1,24 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import DraggableWindow from "@/components/DraggableWindow";
-import AboutContent from "@/components/AboutContent";
-import LinksContent from "@/components/LinksContent";
+import AboutContent from "@/Content/AboutContent";
+import LinksContent from "@/Content/LinksContent";
+import ProjectsContent from "@/Content/ProjectsContent";
 import BackgroundBlobs from "@/components/BackgroundBlobs";
 import Button from "@/components/Button";
 
 export default function Home() {
   // Show Hide Window
   const [showAbout, setShowAbout] = useState(false);
+  const [showProjects, setShowProjects] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
+  
   // Drag Constraints
   const container = useRef(null);
+  // Responsive
+  const isMobile = !useMediaQuery("(min-width: 640px)");
   //Stack Order
   const [zOrder, setZOrder] = useState<{ [key: string]: number }>({});
   const [currentTopZ, setCurrentTopZ] = useState(100);
@@ -32,18 +38,13 @@ export default function Home() {
       {/* Fixed Home window */}
       <div
         className="
-          fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-          bg-white rounded-md border border-gray-300 shadow-lg z-50
-          flex flex-col
+          fixed transform
+          bg-white rounded-md border border-gray-300 shadow-lg
+          z-50 flex flex-col
+          w-full h-full
+          md:w-[50vw] md:h-[60vh]
+          md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2
         "
-        style={{
-          width: `40vw`,
-          height: `50vh`,
-          maxWidth: `1000px`,
-          maxHeight: `800px`,
-          minWidth: `750px`,
-          minHeight: `600px`,
-        }}
       >
         {/* Header bar */}
         <div
@@ -61,7 +62,7 @@ export default function Home() {
           <p className="text-gray-600 mb-6 text-center">
             MCS Student at Columbia
           </p>
-          <div className="flex gap-4 ">
+          <div className="flex flex-col sm:flex-row gap-4 ">
             <Button
               onClick={() => {
                 setShowAbout(true);
@@ -69,6 +70,14 @@ export default function Home() {
               }}
             >
               About Me
+            </Button>
+            <Button
+              onClick={() => {
+                setShowProjects(true);
+                activateWindow("Projects");
+              }}
+            >
+              Projects
             </Button>
             <Button
               onClick={() => {
@@ -88,18 +97,39 @@ export default function Home() {
           title="About"
           onClose={() => setShowAbout(false)}
           constraintRef={container}
-          width={40}
-          height={50}
+          width={isMobile ? 100 : 40}
+          height={isMobile ? 100 : 50}
           maxWidth={1000}
           maxHeight={800}
-          minWidth={750}
-          minHeight={600}
-          startX={10}
-          startY={10}
+          minWidth={isMobile ? 0 : 750}
+          minHeight={isMobile ? 0 : 600}
+          startX={isMobile ? 0 : 10}
+          startY={isMobile ? 0 : 10}
           style={{ zIndex: zOrder["About"] || 100 }}
           onMouseDown={() => activateWindow("About")}
         >
           <AboutContent />
+        </DraggableWindow>
+      )}
+
+      {/* Projects window */}
+      {showProjects && (
+        <DraggableWindow
+          title="Projects"
+          onClose={() => setShowProjects(false)}
+          constraintRef={container}
+          width={isMobile ? 100 : 50}
+          height={isMobile ? 100 : 60}
+          maxWidth={1000}
+          maxHeight={800}
+          minWidth={isMobile ? 0 : 750}
+          minHeight={isMobile ? 0 : 600}
+          startX={isMobile ? 0 : 22}
+          startY={isMobile ? 0 : 15}
+          style={{ zIndex: zOrder["Projects"] || 100 }}
+          onMouseDown={() => activateWindow("Projects")}
+        >
+          <ProjectsContent />
         </DraggableWindow>
       )}
 
@@ -109,14 +139,14 @@ export default function Home() {
           title="Links"
           onClose={() => setShowLinks(false)}
           constraintRef={container}
-          width={40}
-          height={40}
-          maxWidth={625}
-          maxHeight={375}
-          minWidth={500}
-          minHeight={300}
-          startX={40}
-          startY={25}
+          width={isMobile ? 100 : 40}
+          height={isMobile ? 100 : 40}
+          maxWidth={isMobile ? 1000 : 625}
+          maxHeight={isMobile ? 1000 : 375}
+          minWidth={isMobile ? 0 : 500}
+          minHeight={isMobile ? 0 : 300}
+          startX={isMobile ? 0 : 40}
+          startY={isMobile ? 0 : 25}
           style={{ zIndex: zOrder["Links"] || 100 }}
           onMouseDown={() => activateWindow("Links")}
         >

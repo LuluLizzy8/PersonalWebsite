@@ -49,15 +49,11 @@ export default function DraggableWindow({
       onMouseDown={onMouseDown}
       style={{
         ...style,
-        width: `${width}vw`,
-        height: `${height}vh`,
-        maxWidth: `${maxWidth}px`,
-        maxHeight: `${maxHeight}px`,
-        minWidth: `${minWidth}px`,
-        minHeight: `${minHeight}px`,
-        top: `${startY}vh`,
-        left: `${startX}vw`,
+        width: `clamp(min(${minWidth}px, 100vw), ${width}vw, min(${maxWidth}px, 100vw))`,
+        height: `clamp(min(${minHeight}px, 100vh), ${height}vh, min(${maxHeight}px, 100vh))`,
         position: "absolute",
+        top:`${startY}vh`,
+        left:`${startX}vw`,
       }}
       className="bg-white rounded-md border border-gray-300 shadow-lg z-50 flex flex-col"
     >

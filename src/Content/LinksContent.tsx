@@ -1,7 +1,7 @@
 export default function LinksContent() {
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <div className="grid grid-cols-3 gap-6 text-center text-gray-800 w-full max-w-3xl">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center text-gray-800 w-full max-w-3xl">
         {/* Github */}
         <a
           href="https://github.com/LuluLizzy8"
@@ -49,7 +49,6 @@ export default function LinksContent() {
 
         {/* YouTube */}
         <a
-          href="https://youtube.com"
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center hover:scale-105 transition"
@@ -64,7 +63,6 @@ export default function LinksContent() {
 
         {/* TikTok */}
         <a
-          href="https://tiktok.com"
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center hover:scale-105 transition"
@@ -79,7 +77,6 @@ export default function LinksContent() {
 
         {/* Xiaohongshu */}
         <a
-          href="https://xiaohongshu.com"
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center hover:scale-105 transition"
