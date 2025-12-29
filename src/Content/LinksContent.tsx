@@ -25,7 +25,7 @@ export default function LinksContent() {
           className="flex flex-col items-center hover:scale-105 transition"
         >
           <img
-            src="./LinkedinIcon.png"
+            src="./LinkedInIcon.png"
             alt="Linkedin Icon"
             className="w-14 h-14 mb-2"
           />
