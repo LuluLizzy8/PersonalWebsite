@@ -1,4 +1,5 @@
 import Chip from "../components/Chip";
+import Image from "next/image";
 
 const tools = ["GitHub", "MongoDB", "Postman", "AWS S3", "Ollama", "RegEx", "JSON",
   "Linux/Unix CLI", "Microsoft Office" ]
@@ -14,9 +15,11 @@ export default function AboutContent() {
     <div className="flex flex-col h-full">
       {/* Top profile section */}
       <div className="flex flex-row items-center p-4 border-b space-x-4 justify-center">
-        <img
-          src="/ProfilePhoto.jpg"
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/ProfilePhoto.jpg`}
           alt="Profile Photo"
+          width={96}
+          height={96}
           className="w-24 h-24 rounded-full"
         />
         <div className="flex flex-col">
