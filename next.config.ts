@@ -1,27 +1,19 @@
-// import type { NextConfig } from "next";
-
-// const repoName = "PersonalWebsite";
-
-// const nextConfig: NextConfig = {
-//   // Required for GitHub Pages (static hosting)
-//   output: "export",
-
-//   // Required because this is a project repo (not username.github.io)
-//   basePath: `/${repoName}`,
-//   assetPrefix: `/${repoName}/`,
-
-//   // Required to avoid Next/Image issues on GitHub Pages
-//   images: {
-//     unoptimized: true,
-//   },
-// };
-
-// export default nextConfig;
-
 import type { NextConfig } from "next";
 
+const isGitHubActions = process.env.GITHUB_ACTIONS === "true";
+const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "PersonalWebsite";
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
+  ...(isGitHubActions
+    ? {
+        basePath: `/${repoName}`,
+        assetPrefix: `/${repoName}/`,
+      }
+    : {}),
 };
 
 export default nextConfig;
