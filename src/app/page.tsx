@@ -233,12 +233,24 @@ export default function Home() {
                   >
                     View GitHub
                   </a>
-                  <button
-                    type="button"
-                    className="rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-600"
-                  >
-                    Live Demo Later
-                  </button>
+                  {activeProject.demoUrl ? (
+                    <a
+                      href={activeProject.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-600 transition hover:scale-[1.02]"
+                    >
+                      Live Demo
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled
+                      className="cursor-not-allowed rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-400"
+                    >
+                      Demo Unavailable
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

@@ -15,6 +15,31 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: "weather-trade-bot",
+    title: "Weather Trade Bot",
+    summary:
+      "Full-stack AI system that generates weather-driven trading recommendations using AWS Bedrock and historical climate data.",
+    shortDescription:
+      "Built a full-stack application that generates trading recommendations based on weather patterns using AWS Bedrock. The system combines historical climate data with LLM reasoning to simulate weather-driven market strategies. Developed a React frontend for user interaction and a serverless backend with AWS Lambda and Bedrock to analyze temperature trends and produce structured recommendations.",
+    longDescription:
+      "Built a full-stack application that generates trading recommendations based on weather patterns using AWS Bedrock. The system combines historical climate data with LLM reasoning to simulate weather-driven market strategies. Developed a React frontend for user interaction, allowing users to input their industry context and select geographic locations across all 50 U.S. states. Designed a serverless backend using AWS Lambda and Bedrock to process requests, analyze temperature trends (HDD/CDD), and generate structured trading recommendations with natural language explanations. Integrated NCEI weather data and implemented domain-specific logic (Heating Degree Days and Cooling Degree Days) to transform raw climate signals into actionable insights. The system demonstrates how LLMs can augment traditional data pipelines to produce interpretable, context-aware financial recommendations.",
+    githubUrl: "https://github.com/LuluLizzy8/Weather-Trade-Bot",
+    demoUrl: "",
+    year: "2025",
+    status: "Hackathon",
+    meta: "Climate AI",
+    tech: [
+      "React.js",
+      "AWS Lambda",
+      "Amazon Bedrock",
+      "Node.js",
+      "NCEI Weather Data API",
+      "REST APIs",
+      "Prompt Engineering",
+    ],
+    palette: "from-[#d7efe7] via-[#d9ecff] to-[#89b4fa]",
+  },
+  {
     id: "outfit-compatibility",
     title: "Outfit Compatibility Scoring",
     summary: "Computer vision pipeline for garment segmentation and outfit-level compatibility scoring.",
@@ -22,9 +47,9 @@ export const projects: Project[] = [
       "Built an end-to-end computer vision pipeline that predicts outfit compatibility from images. Fine-tuned a YOLOv8 segmentation model on DeepFashion2 to detect garments and extract clothing crops, then encoded items using a ResNet-18 embedding network. A learned compatibility model scores garment pairs and aggregates them to produce an overall outfit compatibility score while identifying poorly matched items.",
     longDescription:
       "This project implements an end-to-end computer vision pipeline that predicts the compatibility of clothing items within an outfit. The system first fine-tunes a YOLOv8 segmentation model on a subset of the DeepFashion2 dataset to detect and segment individual garments from full outfit images. After segmentation, the pipeline extracts garment crops and maps each item into coarse clothing categories (e.g., top, bottom, outerwear, dress). These garment images are then encoded using a ResNet-18 feature extractor trained on ImageNet, which produces normalized visual embeddings capturing style and appearance. A compatibility model combines these visual embeddings with learned type embeddings representing garment categories and feeds them into a multilayer perceptron to compute pairwise compatibility scores. The system aggregates pairwise scores to generate an overall outfit compatibility score and identifies the least compatible item combinations within an outfit. The project includes data preprocessing pipelines, hyperparameter tuning experiments, automated training workflows, and visualization tools for analyzing compatibility scores across thousands of outfit images.",
-    githubUrl: "https://github.com/LuluLizzy8",
-    demoUrl: "",
-    year: "2024",
+    githubUrl: "https://github.com/LuluLizzy8/OutfitOps",
+    demoUrl: "https://outfit-ops.vercel.app/",
+    year: "2025",
     status: "Research project",
     meta: "Fashion AI",
     tech: [
