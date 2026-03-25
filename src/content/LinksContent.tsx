@@ -47,6 +47,20 @@ export default function LinksContent() {
           <span className="font-semibold">Instagram</span>
         </a>
 
+        {/* Xiaohongshu */}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center hover:scale-105 transition"
+        >
+          <img
+            src="./ComingSoonIcon.jpg"
+            alt="Xiaohongshu Icon"
+            className="w-14 h-14 mb-2"
+          />
+          <span className="font-semibold">RedNote</span>
+        </a>
+
         {/* YouTube */}
         <a
           target="_blank"
@@ -73,20 +87,6 @@ export default function LinksContent() {
             className="w-14 h-14 mb-2"
           />
           <span className="font-semibold">TikTok</span>
-        </a>
-
-        {/* Xiaohongshu */}
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-col items-center hover:scale-105 transition"
-        >
-          <img
-            src="./ComingSoonIcon.jpg"
-            alt="Xiaohongshu Icon"
-            className="w-14 h-14 mb-2"
-          />
-          <span className="font-semibold">RedNote</span>
         </a>
       </div>
     </div>
