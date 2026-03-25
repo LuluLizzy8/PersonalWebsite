@@ -58,7 +58,7 @@ export default function AboutContent() {
             <p className="text-gray-600">MSCS at Columbia Engineering</p>
           </div>
           <a
-            href="/Elizabeth_Lu_Resume.pdf"
+            href="./Elizabeth_Lu_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-[#D8E2DC] px-4 py-2 text-sm font-semibold text-gray-700 transition hover:scale-[1.02]"
