@@ -96,19 +96,23 @@ export default function DraggableWindow({
         top: resolvedTop ?? `${startY ?? 0}vh`,
         left: resolvedLeft ?? `${startX ?? 0}vw`,
       }}
-      className="z-50 flex min-h-0 min-w-0 flex-col overflow-hidden rounded-md border border-gray-300 bg-white shadow-lg"
+      className="z-50 flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl border border-[rgba(160,205,175,0.55)] bg-white/90 shadow-[0_8px_28px_rgba(80,130,90,0.13)] backdrop-blur-md"
     >
       <div
         onPointerDown={(e) => dragControls.start(e)}
-        className="flex min-h-[58px] items-center justify-between rounded-t-md bg-[#D8E2DC] px-5 py-3"
+        className="flex min-h-[50px] shrink-0 items-center justify-between border-b-2 border-[rgba(160,205,175,0.45)] bg-white/95 px-5 py-3"
       >
-        <span className="pr-4 text-xl font-semibold text-gray-600">{title}</span>
+        <span
+          className="pr-4 text-sm italic text-[#7a8a72]"
+          style={{ fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif" }}
+        >
+          ✦ {title}
+        </span>
         <button
           onClick={onClose}
-          className="shrink-0 text-3xl leading-none text-gray-600 transition hover:scale-110"
-        >
-          ×
-        </button>
+          aria-label="Close window"
+          className="h-3 w-3 shrink-0 rounded-full border border-[#c88090] bg-[#e8a0b0] transition hover:scale-125 hover:brightness-90"
+        />
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto p-4">{children}</div>
