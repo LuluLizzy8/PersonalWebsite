@@ -102,7 +102,7 @@ export default function Home() {
             { emoji: "🔗",   label: "Links",    action: () => { setShowLinks(true);    activateWindow("Links");    } },
           ] as const
         ).map(({ emoji, label, action }) => (
-          <button key={label} onClick={action} className="flex flex-col items-center gap-1">
+          <button key={label} onClick={action} aria-label={`Open ${label}`} className="flex flex-col items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(160,205,175,0.8)] focus-visible:ring-offset-2 rounded-xl">
             <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl border border-[rgba(160,200,170,0.45)] bg-white/72 text-xl shadow-sm backdrop-blur-md transition hover:scale-105">
               {emoji}
             </div>
