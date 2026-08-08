@@ -44,7 +44,9 @@
     rgba(200, 220, 205, 0.3) 60%,
     transparent 100%
   );
-  animation: silkRipple linear infinite;
+  animation-name: silkRipple;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 @keyframes silkRipple {
   0%   { transform: translateX(-33%); }
