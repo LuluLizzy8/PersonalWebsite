@@ -50,10 +50,10 @@ export default function AboutContent() {
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-center">
           <div className="flex flex-col text-center sm:text-left">
             <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
-              <h2 className="text-2xl font-bold text-[#F4ACB7]">
+              <h2 className="text-2xl font-bold text-[#b06880]">
                 Elizabeth Lu
               </h2>
-              <h2 className="text-lg text-[#F4ACB7]">{"卢晶晶"}</h2>
+              <h2 className="text-lg text-[#b06880]">{"卢晶晶"}</h2>
             </div>
             <p className="text-gray-600">MSCS at Columbia Engineering</p>
           </div>
@@ -61,7 +61,8 @@ export default function AboutContent() {
             href="./Elizabeth_Lu_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-[#D8E2DC] px-4 py-2 text-sm font-semibold text-gray-700 transition hover:scale-[1.02]"
+            className="inline-flex items-center justify-center rounded-full border border-[rgba(160,205,175,0.5)] bg-white/70 px-4 py-2 text-sm italic text-[#5a8068] transition hover:scale-[1.02]"
+            style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
           >
             Resume
           </a>
@@ -78,7 +79,7 @@ export default function AboutContent() {
           creative.
         </p>
 
-        <h3 className="text-2xl font-semibold text-[#F4ACB7]">Education</h3>
+        <h3 className="text-2xl font-semibold text-[#b06880]">Education</h3>
         <div className="ml-2 border-l border-gray-200 pl-4">
           <div className="flex flex-col justify-between sm:flex-row sm:items-center">
             <h2 className="text-l font-bold text-[#73b2de]">
@@ -98,7 +99,7 @@ export default function AboutContent() {
           BA in Computer Science & Economics, Minor in Physics & Math
         </div>
 
-        <h3 className="text-2xl font-semibold text-[#F4ACB7]">Experience</h3>
+        <h3 className="text-2xl font-semibold text-[#b06880]">Experience</h3>
         <div className="ml-2 border-l border-gray-200 pl-4">
           <div className="flex flex-col justify-between sm:flex-row sm:items-center">
             <h2 className="text-l font-bold text-gray-600">Bain & Company</h2>
@@ -123,9 +124,9 @@ export default function AboutContent() {
           Tech Intern
         </div>
 
-        <h3 className="text-2xl font-semibold text-[#F4ACB7]">Skills</h3>
+        <h3 className="text-2xl font-semibold text-[#b06880]">Skills</h3>
         <div className="ml-2 border-l border-gray-200 pl-4">
-          <h4 className="text-lg font-semibold text-[#F4ACB7]">
+          <h4 className="text-lg font-semibold text-[#b06880]">
             Coding Languages
           </h4>
           <div className="flex flex-wrap gap-3">
@@ -135,7 +136,7 @@ export default function AboutContent() {
           </div>
         </div>
         <div className="ml-2 border-l border-gray-200 pl-4">
-          <h4 className="text-lg font-semibold text-[#F4ACB7]">
+          <h4 className="text-lg font-semibold text-[#b06880]">
             Tools & Technologies
           </h4>
           <div className="flex flex-wrap gap-3">
@@ -145,7 +146,7 @@ export default function AboutContent() {
           </div>
         </div>
         <div className="ml-2 border-l border-gray-200 pl-4">
-          <h4 className="text-lg font-semibold text-[#F4ACB7]">
+          <h4 className="text-lg font-semibold text-[#b06880]">
             Frameworks & Libraries
           </h4>
           <div className="flex flex-wrap gap-3">
@@ -155,7 +156,7 @@ export default function AboutContent() {
           </div>
         </div>
 
-        <h3 className="text-2xl font-semibold text-[#F4ACB7]">Languages</h3>
+        <h3 className="text-2xl font-semibold text-[#b06880]">Languages</h3>
         <div className="ml-2 pl-4">
           <ul className="list-inside list-disc space-y-1 text-gray-600">
             <li>Chinese (Fluent)</li>
@@ -163,7 +164,7 @@ export default function AboutContent() {
           </ul>
         </div>
 
-        <h3 className="text-2xl font-semibold text-[#F4ACB7]">Interests</h3>
+        <h3 className="text-2xl font-semibold text-[#b06880]">Interests</h3>
         <div className="ml-2 pl-4">
           <ul className="list-inside list-disc space-y-1 text-gray-600">
             <li>{"Mantou 馒头 (My Cat)"}</li>
