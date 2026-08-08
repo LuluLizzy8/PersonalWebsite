@@ -48,7 +48,7 @@ function ProjectCard({
           {project.tech.slice(0, 3).map((item) => (
             <span
               key={item}
-              className="rounded-full bg-[#F7F7F8] px-3 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-200"
+              className="rounded-full bg-[#f0f6f1] px-3 py-1 text-xs font-medium text-[#5a7a62] ring-1 ring-[rgba(160,205,175,0.3)]"
             >
               {item}
             </span>
@@ -69,7 +69,7 @@ export default function ProjectsContent({
       <div className="border-b px-4 py-4 sm:px-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-[#F4ACB7]">Projects</h2>
+            <h2 className="text-2xl font-bold text-[#b06880]">Projects</h2>
             <p className="max-w-2xl text-sm text-gray-600">
               Selected work presented as standalone portfolio blocks. Click a card to open the full project window.
             </p>
