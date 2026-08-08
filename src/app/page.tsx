@@ -7,7 +7,7 @@ import AboutContent from "@/content/AboutContent";
 import LinksContent from "@/content/LinksContent";
 import ProjectsContent from "@/content/ProjectsContent";
 import { Project } from "@/content/projectsData";
-import BackgroundBlobs from "@/components/BackgroundBlobs";
+import SilkBackground from "@/components/SilkBackground";
 import Button from "@/components/Button";
 
 export default function Home() {
@@ -44,7 +44,8 @@ export default function Home() {
       <div
         className="
           fixed transform
-          bg-white rounded-md border border-gray-300 shadow-lg
+          bg-white/90 rounded-xl border border-[rgba(160,205,175,0.55)]
+          shadow-[0_8px_28px_rgba(80,130,90,0.13)] backdrop-blur-md
           z-50 flex flex-col
           w-full h-full
           md:h-[min(68vh,640px)] md:w-[min(56vw,780px)]
@@ -53,47 +54,69 @@ export default function Home() {
       >
         {/* Header bar */}
         <div
-          className="flex items-center justify-between bg-[#D8E2DC] text-black px-4 rounded-t-md"
+          className="flex items-center justify-between border-b-2 border-[rgba(160,205,175,0.45)] bg-white/95 px-5 rounded-t-xl"
           style={{ height: "50px" }}
         >
-          <span className="font-semibold text-lg text-gray-600">Home</span>
+          <span
+            className="text-sm italic text-[#7a8a72]"
+            style={{ fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif" }}
+          >
+            ✦ home
+          </span>
         </div>
 
         {/* Inner content */}
         <div className="flex flex-col items-center justify-center flex-1 p-8">
-          <h1 className="text-5xl text-[#FFCAD4] font-bold mb-2">
+          <h1
+            className="text-5xl italic mb-2"
+            style={{
+              fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif",
+              color: "#b06880",
+            }}
+          >
             hi! i&apos;m lizzy
           </h1>
-          <p className="text-gray-600 mb-6 text-center">
+          <p className="mb-6 text-center text-[#90a890]">
             MCS Student at Columbia
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 ">
-            <Button
-              onClick={() => {
-                setShowAbout(true);
-                activateWindow("About");
-              }}
-            >
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button onClick={() => { setShowAbout(true); activateWindow("About"); }}>
               About Me
             </Button>
-            <Button
-              onClick={() => {
-                setShowProjects(true);
-                activateWindow("Projects");
-              }}
-            >
+            <Button onClick={() => { setShowProjects(true); activateWindow("Projects"); }}>
               Projects
             </Button>
-            <Button
-              onClick={() => {
-                setShowLinks(true);
-                activateWindow("Links");
-              }}
-            >
+            <Button onClick={() => { setShowLinks(true); activateWindow("Links"); }}>
               Links
             </Button>
           </div>
         </div>
+      </div>
+
+      {/* Desktop sidebar icons — desktop only */}
+      <div className="absolute left-5 top-1/2 -translate-y-1/2 z-10 hidden flex-col gap-4 md:flex">
+        {(
+          [
+            { emoji: "🧍‍♀️", label: "About",    action: () => { setShowAbout(true);    activateWindow("About");    } },
+            { emoji: "🗂️",   label: "Projects", action: () => { setShowProjects(true); activateWindow("Projects"); } },
+            { emoji: "🔗",   label: "Links",    action: () => { setShowLinks(true);    activateWindow("Links");    } },
+          ] as const
+        ).map(({ emoji, label, action }) => (
+          <button key={label} onClick={action} className="flex flex-col items-center gap-1">
+            <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl border border-[rgba(160,200,170,0.45)] bg-white/72 text-xl shadow-sm backdrop-blur-md transition hover:scale-105">
+              {emoji}
+            </div>
+            <span
+              className="text-[8.5px] italic text-[#5a8068]"
+              style={{
+                fontFamily: "'Palatino Linotype', Palatino, serif",
+                textShadow: "0 1px 4px rgba(255,255,255,0.9)",
+              }}
+            >
+              {label}
+            </span>
+          </button>
+        ))}
       </div>
 
       {/* About window */}
@@ -184,7 +207,7 @@ export default function Home() {
             <div className="grid gap-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(260px,0.75fr)]">
               <div className="space-y-5">
                 <section>
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-400">Description</h3>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#90a890]">Description</h3>
                   <div className="mt-3 max-h-[260px] overflow-y-auto pr-2">
                     <p className="text-base leading-7 text-gray-600">
                       {showFullProjectDescription
@@ -210,13 +233,13 @@ export default function Home() {
               </div>
 
               <div className="space-y-5">
-                <section className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-400">Technology Used</h3>
+                <section className="rounded-2xl border border-[rgba(160,205,175,0.3)] bg-white/70 p-4 shadow-sm">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#90a890]">Technology Used</h3>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {activeProject.tech.map((item) => (
                       <span
                         key={item}
-                        className="rounded-full bg-[#F7F7F8] px-3 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-200"
+                        className="rounded-full bg-[#f0f6f1] px-3 py-1 text-xs font-medium text-[#5a7a62] ring-1 ring-[rgba(160,205,175,0.3)]"
                       >
                         {item}
                       </span>
@@ -229,7 +252,7 @@ export default function Home() {
                     href={activeProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full bg-[#D8E2DC] px-4 py-2 text-sm font-semibold text-gray-700 transition hover:scale-[1.02]"
+                    className="rounded-full border border-[rgba(160,205,175,0.5)] bg-white/70 px-4 py-2 text-sm font-semibold text-[#5a8068] transition hover:scale-[1.02]"
                   >
                     View GitHub
                   </a>
@@ -279,7 +302,7 @@ export default function Home() {
         </DraggableWindow>
       )}
 
-      <BackgroundBlobs />
+      <SilkBackground />
     </main>
   );
 }
