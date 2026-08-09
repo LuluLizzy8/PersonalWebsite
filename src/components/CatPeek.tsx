@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-
 export default function CatPeek() {
   const [popped, setPopped] = useState(false);
 
@@ -17,11 +15,9 @@ export default function CatPeek() {
       }}
       onClick={() => setPopped((p) => !p)}
     >
-      <Image
-        src="/mantou/mantou1.png"
+      <img
+        src="./mantou.png"
         alt="Mantou"
-        width={160}
-        height={240}
         className="w-40 h-auto"
       />
     </div>
