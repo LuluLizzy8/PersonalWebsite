@@ -9,6 +9,8 @@ import ProjectsContent from "@/content/ProjectsContent";
 import { Project } from "@/content/projectsData";
 import SilkBackground from "@/components/SilkBackground";
 import Button from "@/components/Button";
+import CatPawPrints from "@/components/CatPawPrints";
+import CatPeek from "@/components/CatPeek";
 
 export default function Home() {
   // Show Hide Window
@@ -268,6 +270,8 @@ export default function Home() {
         </DraggableWindow>
       )}
 
+      <CatPeek />
+      <CatPawPrints />
       <SilkBackground />
     </main>
   );
