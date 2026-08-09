@@ -27,11 +27,11 @@ export default function VantaBackground() {
         touchControls: true,
         gyroControls: false,
         highlightColor: 0xffffff,
-        midtoneColor: 0xedebec,
-        lowlightColor: 0xedfff4,
-        baseColor: 0xfff2f7,
-        blurFactor: 0.7,
-        speed: 2.2
+        midtoneColor: 0xffd6e0,
+        lowlightColor: 0xfff7fa,
+        baseColor: 0xffffff,
+        blurFactor: 0.90,
+        speed: 2
       });
     })();
 
@@ -57,8 +57,8 @@ export default function VantaBackground() {
       minWidth: 200,
       scale: 1,
       scaleMobile: 1,
-      color1: 0xffffff,
-      color2: 0xffffff,
+      color1: 0x3d5e4a,
+      color2: 0x3d5e4a,
       birdSize: 0.70,
       wingSpan: 13,
       speedLimit: 4,
