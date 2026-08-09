@@ -45,7 +45,7 @@ export default function VantaBackground() {
   // Birds
   useEffect(() => {
     if (!birdsReady || birdsEffect.current || !birdsEl.current) return;
-    const w = window as any;
+    const w = window as typeof window & { VANTA?: { BIRDS?: (opts: Record<string, unknown>) => { destroy: () => void } } };
     if (!w.VANTA?.BIRDS) return;
 
     birdsEffect.current = w.VANTA.BIRDS({
