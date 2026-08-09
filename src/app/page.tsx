@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import DraggableWindow from "@/components/DraggableWindow";
 import AboutContent from "@/content/AboutContent";
@@ -16,8 +16,9 @@ export default function Home() {
   const [showProjects, setShowProjects] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
-  const [showFullProjectDescription, setShowFullProjectDescription] = useState(false);
-  
+  const [showMore, setShowMore] = useState(false);
+  useEffect(() => setShowMore(false), [activeProject]);
+
   // Drag Constraints
   const container = useRef(null);
   // Responsive
@@ -31,10 +32,6 @@ export default function Home() {
   };
   const activeProjectWindowKey = activeProject ? `project:${activeProject.id}` : "project";
 
-  useEffect(() => {
-    setShowFullProjectDescription(false);
-  }, [activeProject]);
-
   return (
     <main
       ref={container}
@@ -44,7 +41,7 @@ export default function Home() {
       <div
         className="
           fixed transform
-          bg-white/90 rounded-xl border border-[rgba(160,205,175,0.55)]
+          bg-white/90 rounded-xl border border-[#8bbfa4]
           shadow-[0_8px_28px_rgba(80,130,90,0.13)] backdrop-blur-md
           z-50 flex flex-col
           w-full h-full
@@ -54,30 +51,30 @@ export default function Home() {
       >
         {/* Header bar */}
         <div
-          className="flex items-center justify-between border-b-2 border-[rgba(160,205,175,0.45)] bg-white/95 px-5 rounded-t-xl"
+          className="flex items-center justify-between border-b border-[#8bbfa4] bg-[rgba(244,250,247,0.97)] px-5 rounded-t-xl"
           style={{ height: "50px" }}
         >
           <span
-            className="text-sm italic text-[#7a8a72]"
+            className="text-base text-[#3d5e4a]"
             style={{ fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif" }}
           >
-            ✦ home
+            ⌂ home
           </span>
         </div>
 
         {/* Inner content */}
         <div className="flex flex-col items-center justify-center flex-1 p-8">
           <h1
-            className="text-5xl italic mb-2"
+            className="text-6xl italic mb-2"
             style={{
               fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif",
-              color: "#b06880",
+              color: "#e8a0b0",
             }}
           >
-            hi! i&apos;m lizzy
+            hi! i&apos;m elizabeth lu
           </h1>
-          <p className="mb-6 text-center text-[#90a890]">
-            MCS Student at Columbia
+          <p className="mb-6 text-center text-base text-[#3d5e4a]" style={{ fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif" }}>
+            MSCS at Columbia
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button onClick={() => { setShowAbout(true); activateWindow("About"); }}>
@@ -93,36 +90,12 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Desktop sidebar icons — desktop only */}
-      <div className="absolute left-5 top-1/2 -translate-y-1/2 z-10 hidden flex-col gap-4 md:flex">
-        {(
-          [
-            { emoji: "🧍‍♀️", label: "About",    action: () => { setShowAbout(true);    activateWindow("About");    } },
-            { emoji: "🗂️",   label: "Projects", action: () => { setShowProjects(true); activateWindow("Projects"); } },
-            { emoji: "🔗",   label: "Links",    action: () => { setShowLinks(true);    activateWindow("Links");    } },
-          ] as const
-        ).map(({ emoji, label, action }) => (
-          <button key={label} onClick={action} aria-label={`Open ${label}`} className="flex flex-col items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(160,205,175,0.8)] focus-visible:ring-offset-2 rounded-xl">
-            <div className="flex h-[46px] w-[46px] items-center justify-center rounded-xl border border-[rgba(160,200,170,0.45)] bg-white/72 text-xl shadow-sm backdrop-blur-md transition hover:scale-105">
-              {emoji}
-            </div>
-            <span
-              className="text-[8.5px] italic text-[#5a8068]"
-              style={{
-                fontFamily: "'Palatino Linotype', Palatino, serif",
-                textShadow: "0 1px 4px rgba(255,255,255,0.9)",
-              }}
-            >
-              {label}
-            </span>
-          </button>
-        ))}
-      </div>
 
       {/* About window */}
       {showAbout && (
         <DraggableWindow
           title="About"
+          icon="✎"
           onClose={() => setShowAbout(false)}
           constraintRef={container}
           width={isMobile ? 100 : 46}
@@ -144,6 +117,7 @@ export default function Home() {
       {showProjects && (
         <DraggableWindow
           title="Projects"
+          icon="◈"
           onClose={() => setShowProjects(false)}
           constraintRef={container}
           width={isMobile ? 100 : 68}
@@ -169,112 +143,103 @@ export default function Home() {
       {activeProject && (
         <DraggableWindow
           title={activeProject.title}
+          icon="◈"
           onClose={() => setActiveProject(null)}
           constraintRef={container}
           width={isMobile ? 100 : 54}
-          height={isMobile ? 100 : 68}
+          height={isMobile ? 100 : undefined}
+          autoHeight={!isMobile}
           maxWidth={1100}
           maxHeight={900}
           minWidth={isMobile ? 0 : 760}
-          minHeight={isMobile ? 0 : 560}
+          minHeight={isMobile ? 0 : 0}
           startX={isMobile ? 0 : 18}
           startY={isMobile ? 0 : 10}
           style={{ zIndex: zOrder[activeProjectWindowKey] || 110 }}
           onMouseDown={() => activateWindow(activeProjectWindowKey)}
         >
-          <div className="flex h-full min-h-0 flex-col px-2 py-2">
-            <div
-              className={`relative mb-5 aspect-[16/6] overflow-hidden rounded-[24px] bg-gradient-to-br ${activeProject.palette}`}
-            >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.88),transparent_38%)]" />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_30%,rgba(17,24,39,0.18)_100%)]" />
-              <div className="absolute left-5 top-5 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-gray-600 shadow-sm">
-                {activeProject.status}
+          <div className={isMobile ? "flex h-full min-h-0 flex-col" : undefined}>
+            <div className={isMobile ? "min-h-0 flex-1 overflow-y-auto px-5 py-5 space-y-5" : "px-5 py-5 space-y-5"}>
+              {/* Title + meta */}
+              <div className="flex items-baseline justify-between gap-4">
+                <h2
+                  className="text-2xl italic text-[#e8a0b0] leading-snug"
+                  style={{ fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif" }}
+                >
+                  ✦ {activeProject.title}
+                </h2>
+                <span className="shrink-0 text-xs font-medium text-[#4a6a58]">{activeProject.year} · {activeProject.status}</span>
               </div>
-              <div className="absolute right-5 top-5 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold text-white">
-                {activeProject.year}
-              </div>
-              <div className="absolute bottom-5 left-5 right-5">
-                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-white/90">
-                  {activeProject.meta}
+
+              {/* Description */}
+              <section>
+                <h3
+                  className="text-xs uppercase tracking-[0.2em] text-[#3d5e4a] font-semibold italic mb-2"
+                  style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
+                >
+                  About
+                </h3>
+                {showMore
+                  ? activeProject.longDescription.split("\n\n").map((para, i) => (
+                      <p key={i} className="text-sm leading-7 text-gray-700">
+                        {para}
+                      </p>
+                    ))
+                  : <p className="text-sm leading-7 text-gray-700">{activeProject.shortDescription}</p>
+                }
+                {activeProject.longDescription && (
+                  <button
+                    onClick={() => setShowMore((v) => !v)}
+                    className="mt-2 text-xs italic text-[#3d5e4a] underline underline-offset-2 hover:text-[#8bbfa4] transition-colors"
+                    style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
+                  >
+                    {showMore ? "view summary" : "view detailed description"}
+                  </button>
+                )}
+              </section>
+
+              {/* Tech */}
+              <section className="rounded-xl border border-[#8bbfa4] bg-white/60 p-4">
+                <h3
+                  className="text-xs uppercase tracking-[0.2em] text-[#3d5e4a] font-semibold italic mb-2"
+                  style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
+                >
+                  Technology
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {activeProject.tech.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full bg-[#f0f6f1] px-3 py-1 text-sm font-medium text-[#3d5e4a] ring-1 ring-[rgba(160,205,175,0.35)]"
+                    >
+                      {item}
+                    </span>
+                  ))}
                 </div>
-                <div className="mt-2 text-2xl font-bold text-white drop-shadow-sm sm:text-3xl">
-                  {activeProject.title}
-                </div>
-              </div>
-            </div>
+              </section>
 
-            <div className="grid gap-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(260px,0.75fr)]">
-              <div className="space-y-5">
-                <section>
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#90a890]">Description</h3>
-                  <div className="mt-3 max-h-[260px] overflow-y-auto pr-2">
-                    <p className="text-base leading-7 text-gray-600">
-                      {showFullProjectDescription
-                        ? activeProject.longDescription
-                        : activeProject.shortDescription}{" "}
-                      <span
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => setShowFullProjectDescription((old) => !old)}
-                        onKeyDown={(event) => {
-                          if (event.key === "Enter" || event.key === " ") {
-                            event.preventDefault();
-                            setShowFullProjectDescription((old) => !old);
-                          }
-                        }}
-                        className="cursor-pointer text-sm font-medium text-gray-400 transition hover:scale-105 hover:text-gray-600"
-                      >
-                        {showFullProjectDescription ? "Show less" : "Show more"}
-                      </span>
-                    </p>
-                  </div>
-                </section>
-              </div>
-
-              <div className="space-y-5">
-                <section className="rounded-2xl border border-[rgba(160,205,175,0.3)] bg-white/70 p-4 shadow-sm">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#90a890]">Technology Used</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {activeProject.tech.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full bg-[#f0f6f1] px-3 py-1 text-xs font-medium text-[#5a7a62] ring-1 ring-[rgba(160,205,175,0.3)]"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-
-                <div className="flex flex-wrap gap-3 pt-1">
+              {/* Links */}
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={activeProject.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-[#8bbfa4] bg-[rgba(244,250,247,0.97)] px-4 py-2 text-sm italic text-[#3d5e4a] transition hover:scale-[1.02] hover:bg-white"
+                  style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
+                >
+                  View GitHub
+                </a>
+                {activeProject.demoUrl && (
                   <a
-                    href={activeProject.githubUrl}
+                    href={activeProject.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full border border-[rgba(160,205,175,0.5)] bg-white/70 px-4 py-2 text-sm font-semibold text-[#5a8068] transition hover:scale-[1.02]"
+                    className="rounded-full border border-[#8bbfa4] bg-[rgba(244,250,247,0.97)] px-4 py-2 text-sm italic text-[#3d5e4a] transition hover:scale-[1.02] hover:bg-white"
+                    style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
                   >
-                    View GitHub
+                    {activeProject.demoLabel ?? "Live Demo"}
                   </a>
-                  {activeProject.demoUrl ? (
-                    <a
-                      href={activeProject.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-600 transition hover:scale-[1.02]"
-                    >
-                      Live Demo
-                    </a>
-                  ) : (
-                    <button
-                      type="button"
-                      disabled
-                      className="cursor-not-allowed rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-400"
-                    >
-                      Demo Unavailable
-                    </button>
-                  )}
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -285,6 +250,7 @@ export default function Home() {
       {showLinks && (
         <DraggableWindow
           title="Links"
+          icon="↗"
           onClose={() => setShowLinks(false)}
           constraintRef={container}
           width={isMobile ? 100 : 38}

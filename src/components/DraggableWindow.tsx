@@ -5,11 +5,13 @@ import React, { useEffect, useState } from "react";
 
 interface DraggableWindowProps {
   title: string;
+  icon?: string;
   onClose: () => void;
   children: React.ReactNode;
   constraintRef: React.RefObject<null>;
   width: number;
-  height: number;
+  height?: number;
+  autoHeight?: boolean;
   maxHeight: number;
   maxWidth: number;
   minHeight: number;
@@ -22,11 +24,13 @@ interface DraggableWindowProps {
 
 export default function DraggableWindow({
   title,
+  icon = "✦",
   onClose,
   children,
   constraintRef,
   width = 50,
   height = 50,
+  autoHeight = false,
   maxHeight,
   maxWidth,
   minHeight,
@@ -59,9 +63,10 @@ export default function DraggableWindow({
   const resolvedWidth = viewport.width
     ? Math.min(Math.max((viewport.width * width) / 100, minWidth), maxWidth, safeWidth)
     : undefined;
-  const resolvedHeight = viewport.height
-    ? Math.min(Math.max((viewport.height * height) / 100, minHeight), maxHeight, safeHeight)
-    : undefined;
+  const resolvedHeight =
+    !autoHeight && viewport.height
+      ? Math.min(Math.max((viewport.height * height) / 100, minHeight), maxHeight, safeHeight)
+      : undefined;
 
   const resolvedLeft =
     viewport.width && resolvedWidth !== undefined
@@ -91,22 +96,25 @@ export default function DraggableWindow({
       style={{
         ...style,
         width: resolvedWidth ?? `min(${width}vw, 100vw)`,
-        height: resolvedHeight ?? `min(${height}vh, 100vh)`,
+        height: autoHeight ? "auto" : (resolvedHeight ?? `min(${height}vh, 100vh)`),
+        maxHeight: autoHeight ? maxHeight : undefined,
+        overflowY: autoHeight ? "auto" : undefined,
         position: "absolute",
         top: resolvedTop ?? `${startY ?? 0}vh`,
         left: resolvedLeft ?? `${startX ?? 0}vw`,
       }}
-      className="z-50 flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl border border-[rgba(160,205,175,0.55)] bg-white/90 shadow-[0_8px_28px_rgba(80,130,90,0.13)] backdrop-blur-md"
+      className={`z-50 flex min-h-0 min-w-0 flex-col rounded-xl border border-[#8bbfa4] bg-white/90 shadow-[0_8px_28px_rgba(80,130,90,0.13)] backdrop-blur-md${autoHeight ? "" : " overflow-hidden"}`}
     >
       <div
         onPointerDown={(e) => dragControls.start(e)}
-        className="flex min-h-[50px] shrink-0 items-center justify-between border-b-2 border-[rgba(160,205,175,0.45)] bg-white/95 px-5 py-3"
+        className="flex min-h-[50px] shrink-0 items-center justify-between border-b border-[#8bbfa4] bg-[rgba(244,250,247,0.97)] px-5 py-3"
+        style={autoHeight ? { position: "sticky", top: 0, zIndex: 1 } : undefined}
       >
         <span
-          className="pr-4 text-sm italic text-[#7a8a72]"
+          className="pr-4 text-base text-[#3d5e4a]"
           style={{ fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif" }}
         >
-          ✦ {title}
+          {icon} {title}
         </span>
         <button
           onClick={onClose}
@@ -115,7 +123,11 @@ export default function DraggableWindow({
         />
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto p-4">{children}</div>
+      {autoHeight ? (
+        <div>{children}</div>
+      ) : (
+        <div className="min-h-0 flex-1 overflow-hidden">{children}</div>
+      )}
     </motion.div>
   );
 }

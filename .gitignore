@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.gstack/
+
+# local dev / scratch
+temp/
+.superpowers/
+docs/
+
+# demo files
+public/card-options-demo.html
+public/vanta-demo.html
+
+# claude local config
+.claude/

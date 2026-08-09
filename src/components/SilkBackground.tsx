@@ -1,76 +1,95 @@
-const petals = [
-  { emoji: "🌸", left: "4%",  fontSize: "13px", animationDuration: "7s",   animationDelay: "0s" },
-  { emoji: "🌿", left: "13%", fontSize: "9px",  animationDuration: "9.5s", animationDelay: "1.5s" },
-  { emoji: "🌸", left: "24%", fontSize: "15px", animationDuration: "8s",   animationDelay: "0.3s" },
-  { emoji: "🌷", left: "36%", fontSize: "10px", animationDuration: "11s",  animationDelay: "3s" },
-  { emoji: "🌸", left: "47%", fontSize: "17px", animationDuration: "7.5s", animationDelay: "0.7s" },
-  { emoji: "🍃", left: "58%", fontSize: "11px", animationDuration: "10s",  animationDelay: "4s" },
-  { emoji: "🌸", left: "68%", fontSize: "9px",  animationDuration: "6.5s", animationDelay: "1.2s" },
-  { emoji: "🌺", left: "77%", fontSize: "14px", animationDuration: "9.5s", animationDelay: "3.3s" },
-  { emoji: "🌷", left: "87%", fontSize: "12px", animationDuration: "8.5s", animationDelay: "0.9s" },
-  { emoji: "🌸", left: "94%", fontSize: "10px", animationDuration: "7.2s", animationDelay: "5s" },
-];
+"use client";
 
-const rippleLines = [
-  { top: "18%", height: "2px", animationDuration: "14s", animationDelay: "0s" },
-  { top: "36%", height: "2px", animationDuration: "19s", animationDelay: "-3s" },
-  { top: "54%", height: "2px", animationDuration: "12s", animationDelay: "-7s" },
-  { top: "72%", height: "2px", animationDuration: "17s", animationDelay: "-5s" },
-  { top: "88%", height: "2px", animationDuration: "21s", animationDelay: "-9s" },
-];
+import { useEffect, useRef, useState } from "react";
+import Script from "next/script";
 
-export default function SilkBackground() {
+export default function VantaBackground() {
+  const fogEl = useRef<HTMLDivElement>(null);
+  const birdsEl = useRef<HTMLDivElement>(null);
+  const fogEffect = useRef<{ destroy: () => void } | null>(null);
+  const birdsEffect = useRef<{ destroy: () => void } | null>(null);
+  const [birdsReady, setBirdsReady] = useState(false);
+
+  // Fog
+  useEffect(() => {
+    if (fogEffect.current) return;
+    let cancelled = false;
+
+    (async () => {
+      const THREE = await import("three");
+      const { default: FOG } = await import("vanta/dist/vanta.fog.min");
+      if (cancelled || !fogEl.current) return;
+
+      fogEffect.current = FOG({
+        el: fogEl.current,
+        THREE,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        highlightColor: 0xffffff,
+        midtoneColor: 0xedebec,
+        lowlightColor: 0xedfff4,
+        baseColor: 0xfff2f7,
+        blurFactor: 0.7,
+        speed: 2.2
+      });
+    })();
+
+    return () => {
+      cancelled = true;
+      fogEffect.current?.destroy();
+      fogEffect.current = null;
+    };
+  }, []);
+
+  // Birds
+  useEffect(() => {
+    if (!birdsReady || birdsEffect.current || !birdsEl.current) return;
+    const w = window as any;
+    if (!w.VANTA?.BIRDS) return;
+
+    birdsEffect.current = w.VANTA.BIRDS({
+      el: birdsEl.current,
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200,
+      minWidth: 200,
+      scale: 1,
+      scaleMobile: 1,
+      color1: 0xffffff,
+      color2: 0xffffff,
+      birdSize: 0.70,
+      wingSpan: 13,
+      speedLimit: 4,
+      separation: 100,
+      alignment: 76,
+      cohesion: 100,
+      quantity: 3,
+      backgroundColor: 0x000000
+    });
+
+    return () => {
+      birdsEffect.current?.destroy();
+      birdsEffect.current = null;
+    };
+  }, [birdsReady]);
+
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-      {/* Silk gradient base */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(150deg, #fce8ee 0%, #e8f4ec 40%, #f4e8f0 70%, #ddeedd 100%)",
+    <>
+      {/* THREE r134 must load before vanta.birds — onLoad chains them */}
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          const s = document.createElement("script");
+          s.src = "https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js";
+          s.onload = () => setBirdsReady(true);
+          document.head.appendChild(s);
         }}
       />
-
-      {/* Animated sheen */}
-      <div className="silk-sheen absolute inset-0" />
-
-      {/* Ripple lines */}
-      <div className="absolute inset-0 overflow-hidden">
-        {rippleLines.map((line, i) => (
-          <div
-            key={i}
-            className="silk-ripple-line"
-            style={{
-              top: line.top,
-              height: line.height,
-              animationDuration: line.animationDuration,
-              animationDelay: line.animationDelay,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Falling petals */}
-      {petals.map((petal, i) => (
-        <div
-          key={i}
-          className="falling-petal"
-          style={{
-            left: petal.left,
-            fontSize: petal.fontSize,
-            animationDuration: petal.animationDuration,
-            animationDelay: petal.animationDelay,
-          }}
-        >
-          {petal.emoji}
-        </div>
-      ))}
-
-      {/* Lace corner ornaments */}
-      <div className="lace-corner" style={{ top: 10, left: 10 }}>❧</div>
-      <div className="lace-corner" style={{ top: 10, right: 10, transform: "scaleX(-1)" }}>❧</div>
-      <div className="lace-corner" style={{ bottom: 10, left: 10, transform: "scaleY(-1)" }}>❧</div>
-      <div className="lace-corner" style={{ bottom: 10, right: 10, transform: "scale(-1,-1)" }}>❧</div>
-    </div>
+      <div ref={fogEl} className="fixed inset-0 -z-10 pointer-events-none" />
+      <div ref={birdsEl} className="fixed inset-0 z-0 pointer-events-none" style={{ mixBlendMode: "screen" }} />
+    </>
   );
 }

@@ -1,20 +1,22 @@
+const palFont = { fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif" };
+
 export default function LinksContent() {
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center text-gray-800 w-full max-w-3xl">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center w-full max-w-3xl">
         {/* Github */}
         <a
           href="https://github.com/LuluLizzy8"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center hover:scale-105 transition"
+          className="flex flex-col items-center hover:scale-105 transition text-[#3d5e4a]"
         >
           <img
             src="./GithubIcon.png"
             alt="Github Icon"
             className="w-14 h-14 mb-2"
           />
-          <span className="font-semibold">Github</span>
+          <span className="font-semibold italic text-sm" style={palFont}>Github</span>
         </a>
 
         {/* Linkedin */}
@@ -22,14 +24,14 @@ export default function LinksContent() {
           href="https://www.linkedin.com/in/elizabethvlu/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center hover:scale-105 transition"
+          className="flex flex-col items-center hover:scale-105 transition text-[#3d5e4a]"
         >
           <img
             src="./LinkedInIcon.png"
             alt="Linkedin Icon"
             className="w-14 h-14 mb-2"
           />
-          <span className="font-semibold">LinkedIn</span>
+          <span className="font-semibold italic text-sm" style={palFont}>LinkedIn</span>
         </a>
 
         {/* Instagram */}
@@ -37,56 +39,56 @@ export default function LinksContent() {
           href="https://www.instagram.com/evl._.8/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center hover:scale-105 transition"
+          className="flex flex-col items-center hover:scale-105 transition text-[#3d5e4a]"
         >
           <img
             src="./InstagramIcon.png"
             alt="Instagram Icon"
             className="w-14 h-14 mb-2"
           />
-          <span className="font-semibold">Instagram</span>
+          <span className="font-semibold italic text-sm" style={palFont}>Instagram</span>
         </a>
 
         {/* Xiaohongshu */}
         <a
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center hover:scale-105 transition"
+          className="flex flex-col items-center hover:scale-105 transition text-[#a0b8a8]"
         >
           <img
             src="./ComingSoonIcon.jpg"
             alt="Xiaohongshu Icon"
             className="w-14 h-14 mb-2"
           />
-          <span className="font-semibold">RedNote</span>
+          <span className="font-semibold italic text-sm" style={palFont}>RedNote</span>
         </a>
 
         {/* YouTube */}
         <a
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center hover:scale-105 transition"
+          className="flex flex-col items-center hover:scale-105 transition text-[#a0b8a8]"
         >
           <img
             src="./ComingSoonIcon.jpg"
             alt="YouTube Icon"
             className="w-14 h-14 mb-2"
           />
-          <span className="font-semibold">YouTube</span>
+          <span className="font-semibold italic text-sm" style={palFont}>YouTube</span>
         </a>
 
         {/* TikTok */}
         <a
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center hover:scale-105 transition"
+          className="flex flex-col items-center hover:scale-105 transition text-[#a0b8a8]"
         >
           <img
             src="./ComingSoonIcon.jpg"
             alt="TikTok Icon"
             className="w-14 h-14 mb-2"
           />
-          <span className="font-semibold">TikTok</span>
+          <span className="font-semibold italic text-sm" style={palFont}>TikTok</span>
         </a>
       </div>
     </div>

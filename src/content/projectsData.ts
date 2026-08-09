@@ -6,23 +6,57 @@ export type Project = {
   longDescription: string;
   githubUrl: string;
   demoUrl?: string;
+  demoLabel?: string;
   year: string;
   status: string;
   meta: string;
   tech: string[];
-  palette: string;
+  accent: string;
 };
 
 export const projects: Project[] = [
   {
+    id: "tripable",
+    title: "Tripable",
+    summary: "Full-stack group travel planner with collaborative voting and shared itinerary generation.",
+    shortDescription:
+      "Tripable lets groups create a trip, share an invite link, submit destination and activity ideas, vote, and generate a shared itinerary. Built with React/Vite/TailwindCSS, Node.js/Express, and Supabase/PostgreSQL. Deployed on Vercel at tripable.pro; OpenAI Codex used throughout development.",
+    longDescription:
+      "Tripable started as a startup class project that four of us built together.\n\nThe idea came from a frustration we all shared: every time a friend group tries to plan a trip, the conversation falls apart across different group chats, everyone's suggestions get buried, and nothing gets decided. So we built Tripable to fix that. You create a trip, send out an invite link, everyone drops in their destination and activity ideas, the group votes, and you walk away with a shared itinerary.\n\nThe stack is React with Vite and TailwindCSS on the frontend, Node.js/Express on the backend, and Supabase/PostgreSQL for the database. Email invites go through Resend, and the app is deployed on Vercel.\n\nFor the class, we ran through the full startup process: user interviews, feature prioritization, prototyping, user acceptance testing, and a few rounds of iteration based on what people actually got confused by. OpenAI Codex helped speed up a lot of the implementation. It's live at tripable.pro.",
+    githubUrl: "https://github.com/liangl5/Tripable",
+    demoUrl: "https://www.tripable.pro/",
+    demoLabel: "Website",
+    year: "2026",
+    status: "Live product",
+    meta: "Travel Planning",
+    tech: ["React", "Node.js", "Express", "Supabase", "PostgreSQL", "Vercel", "OpenAI Codex"],
+    accent: "#177563",
+  },
+  {
+    id: "guandan",
+    title: "Guandan",
+    summary: "Browser-based Guandan card game with AI opponents and WebSocket multiplayer.",
+    shortDescription:
+      "Full browser implementation of Guandan with solo play against three AI seats and real-time multiplayer rooms via PartyKit. Complete hand-ranking logic written in vanilla JavaScript: singles, pairs, triples, full houses, plates, tubes, bombs, level-card mechanics, and tribute rules.",
+    longDescription:
+      "Guandan is a Chinese card game I grew up playing, and I couldn't find a good browser version of it anywhere. Every existing app was either mobile-only or China-only. So I built one from scratch.\n\nThere are two modes: solo, where you play against three AI opponents, and multiplayer, where you share an invite link and up to four people join a live room. The real-time sync is handled by PartyKit, which keeps a persistent WebSocket connection between all players so moves and game state update instantly across everyone's screens.\n\nThe hardest part was implementing the full Guandan ruleset in JavaScript. The hand-ranking logic covers singles, pairs, triples, full houses, plates, tubes, and bombs. On top of that there are level-card mechanics where the \"wild\" cards change every round, plus tribute rules at the start of each game. Getting all of that right with no bugs took a while.\n\nThere are still features I want to add. One big one is letting players group and organize their hand, so you can drag cards around and arrange them by combination before you play. Right now the hand is just displayed in order, which makes it harder to think through your moves, especially in a complex game like this.",
+    githubUrl: "https://github.com/LuluLizzy8/Guandan",
+    demoUrl: "https://guandan-online.vercel.app",
+    demoLabel: "Play Now",
+    year: "2026",
+    status: "In progress",
+    meta: "Card Game",
+    tech: ["HTML", "CSS", "JavaScript", "PartyKit"],
+    accent: "#1f5b57",
+  },
+  {
     id: "weather-trade-bot",
     title: "Weather Trade Bot",
-    summary:
-      "Full-stack AI system that generates weather-driven trading recommendations using AWS Bedrock and historical climate data.",
+    summary: "LLM-powered trading recommendation engine driven by NCEI climate data and HDD/CDD signals.",
     shortDescription:
-      "Built a full-stack application that generates trading recommendations based on weather patterns using AWS Bedrock. The system combines historical climate data with LLM reasoning to simulate weather-driven market strategies. Developed a React frontend for user interaction and a serverless backend with AWS Lambda and Bedrock to analyze temperature trends and produce structured recommendations.",
+      "Users input industry context and U.S. state; the system fetches NCEI historical climate data, computes HDD/CDD metrics, and sends structured prompts to an LLM on Amazon Bedrock via AWS Lambda. Returns trading recommendations with natural language reasoning. React frontend, serverless backend.",
     longDescription:
-      "Built a full-stack application that generates trading recommendations based on weather patterns using AWS Bedrock. The system combines historical climate data with LLM reasoning to simulate weather-driven market strategies. Developed a React frontend for user interaction, allowing users to input their industry context and select geographic locations across all 50 U.S. states. Designed a serverless backend using AWS Lambda and Bedrock to process requests, analyze temperature trends (HDD/CDD), and generate structured trading recommendations with natural language explanations. Integrated NCEI weather data and implemented domain-specific logic (Heating Degree Days and Cooling Degree Days) to transform raw climate signals into actionable insights. The system demonstrates how LLMs can augment traditional data pipelines to produce interpretable, context-aware financial recommendations.",
+      "This was a hackathon project built around a question: can you use an LLM to turn raw weather data into something a trader could actually act on?\n\nThe idea is that weather has a real impact on commodity markets: energy demand, agricultural futures, that kind of thing, but making sense of the data requires a layer of reasoning that's hard to automate with traditional rule-based systems. So we built a pipeline that does it with an LLM.\n\nThe user picks their industry and a U.S. state. The system pulls historical temperature data from the NOAA NCEI API and converts it into Heating Degree Days and Cooling Degree Days, which are standard energy-industry metrics for quantifying temperature-driven demand. Those numbers, combined with the user's industry context, get packaged into a structured prompt and sent to a language model running on Amazon Bedrock via an AWS Lambda function. The model comes back with a trading recommendation and an explanation of why.\n\nThe frontend is React. The backend is fully serverless so there's no always-on infrastructure. We built this in a single hackathon session, which made the scoping decisions interesting. The prompt engineering work ended up being as important as the data pipeline.",
     githubUrl: "https://github.com/LuluLizzy8/Weather-Trade-Bot",
     demoUrl: "",
     year: "2025",
@@ -37,16 +71,16 @@ export const projects: Project[] = [
       "REST APIs",
       "Prompt Engineering",
     ],
-    palette: "from-[#d7efe7] via-[#d9ecff] to-[#89b4fa]",
+    accent: "#0284c7",
   },
   {
     id: "outfit-compatibility",
     title: "Outfit Compatibility Scoring",
-    summary: "Computer vision pipeline for garment segmentation and outfit-level compatibility scoring.",
+    summary: "CV pipeline: YOLOv8 garment segmentation + ResNet-18 embeddings + MLP compatibility scoring.",
     shortDescription:
-      "Built an end-to-end computer vision pipeline that predicts outfit compatibility from images. Fine-tuned a YOLOv8 segmentation model on DeepFashion2 to detect garments and extract clothing crops, then encoded items using a ResNet-18 embedding network. A learned compatibility model scores garment pairs and aggregates them to produce an overall outfit compatibility score while identifying poorly matched items.",
+      "End-to-end computer vision pipeline for outfit compatibility prediction. Fine-tuned YOLOv8-Seg on DeepFashion2 for garment detection and segmentation. ResNet-18 encodes garment crops into visual embeddings, combined with learned type embeddings and passed through an MLP to predict pairwise compatibility scores aggregated into an outfit-level rating.",
     longDescription:
-      "This project implements an end-to-end computer vision pipeline that predicts the compatibility of clothing items within an outfit. The system first fine-tunes a YOLOv8 segmentation model on a subset of the DeepFashion2 dataset to detect and segment individual garments from full outfit images. After segmentation, the pipeline extracts garment crops and maps each item into coarse clothing categories (e.g., top, bottom, outerwear, dress). These garment images are then encoded using a ResNet-18 feature extractor trained on ImageNet, which produces normalized visual embeddings capturing style and appearance. A compatibility model combines these visual embeddings with learned type embeddings representing garment categories and feeds them into a multilayer perceptron to compute pairwise compatibility scores. The system aggregates pairwise scores to generate an overall outfit compatibility score and identifies the least compatible item combinations within an outfit. The project includes data preprocessing pipelines, hyperparameter tuning experiments, automated training workflows, and visualization tools for analyzing compatibility scores across thousands of outfit images.",
+      "The question this project tries to answer is: can a model look at a photo of an outfit and tell you which pieces don't go together?\n\nThe pipeline has three stages. First, a YOLOv8 segmentation model fine-tuned on the DeepFashion2 dataset detects and isolates each garment in an outfit photo, and classifies it into a broad category like top, bottom, outerwear, or dress. Second, each cropped garment gets passed through a ResNet-18 encoder pre-trained on ImageNet, which compresses it down into a visual embedding that captures style and appearance. Third, those embeddings, along with learned embeddings that encode what category each garment belongs to, get fed into a small MLP that scores every possible garment pair for compatibility. The system then aggregates all the pairwise scores into a single outfit-level rating and flags the weakest combinations.\n\nThe interesting design challenge was figuring out how to represent \"does this top go with these pants\" mathematically. The type embeddings were key. Without them, the model couldn't distinguish between two items that look similar but play different roles in an outfit.\n\nI also built out preprocessing pipelines, ran hyperparameter tuning experiments, and wrote visualization tools for inspecting score distributions across large chunks of the dataset.",
     githubUrl: "https://github.com/LuluLizzy8/OutfitOps",
     demoUrl: "https://outfit-ops.vercel.app/",
     year: "2025",
@@ -63,54 +97,54 @@ export const projects: Project[] = [
       "Pandas",
       "tqdm",
     ],
-    palette: "from-[#D8E2DC] via-[#FFE5EC] to-[#F4ACB7]",
+    accent: "#db2777",
   },
   {
     id: "video-sharing-platform",
     title: "Video Sharing Platform",
-    summary: "A web app centered on uploading, browsing, and watching video content.",
+    summary: "Full-stack video sharing platform with REST APIs, Angular SPA frontend, and Spring Boot backend.",
     shortDescription:
-      "Developed a full-stack video sharing platform with REST APIs for authentication, video uploads, and database operations. Built the frontend using Angular to support video playback, comments, and user subscriptions. Implemented scalable backend services with Spring Boot to manage user accounts and video metadata.",
+      "Team of four. Spring Boot and Node.js backend exposing RESTful APIs for auth, video uploads, metadata, and interactions. Angular/TypeScript SPA frontend with async API communication for video playback, comments, and subscriptions. Agile workflow with distributed ownership across backend services and frontend UI.",
     longDescription:
-      "This project is a full-stack video sharing platform developed by a four-person team using modern web development frameworks. The backend is implemented with Spring Boot and Node.js, providing RESTful APIs for user authentication, video uploads, metadata management, and database operations. The frontend is built using Angular and TypeScript, enabling users to upload videos, browse content, play videos, leave comments, and subscribe to other users. The application integrates persistent data storage for user accounts, video metadata, and interactions, supporting a dynamic content-driven platform. Development followed an Agile workflow, with responsibilities divided across team members to design the system architecture, implement backend services, and develop responsive frontend interfaces. The final product demonstrates a complete client-server architecture with asynchronous API communication and a scalable structure suitable for media-sharing applications.",
+      "A full-stack YouTube-style video sharing platform built as a class project with a team of four.\n\nUsers can create accounts, upload videos, browse a content feed, watch and comment on videos, and subscribe to other creators. Everything persists in a relational database: user accounts, video metadata, comments, subscription relationships. The backend is Spring Boot and Node.js, exposing REST APIs for all of that. The frontend is Angular with TypeScript, organized into reusable components: a video player, a comment thread, a subscription feed. All API calls are async so the page stays responsive while data loads.\n\nTypeScript made a real difference as the codebase grew. Catching type errors at compile time rather than at runtime saved a lot of debugging time, especially when the API response shapes kept changing early on.",
     githubUrl: "https://github.com/LuluLizzy8/Video-Sharing-Platform",
     demoUrl: "",
     year: "2024",
     status: "Web app",
     meta: "Creator Platform",
     tech: ["Java", "HTML", "CSS", "TypeScript", "Angular", "Spring Boot", "Node.js", "Maven"],
-    palette: "from-[#c8d8d3] via-[#d9e6ff] to-[#8dc9f2]",
+    accent: "#dc2626",
   },
   {
     id: "legal-qa-llm-evaluation",
     title: "Legal Q&A LLM Evaluation",
-    summary: "NLP project focused on evaluating large language models for legal question answering.",
+    summary: "Benchmarking LLMs on legal multiple-choice QA with a proposed Weighted Correctness Score metric.",
     shortDescription:
-      "Developed an evaluation framework to benchmark large language models on legal multiple-choice question answering using the CaseHOLD dataset. Ran local inference across multiple LLMs and legal NLP models, standardized outputs using regex parsing, and compared performance across architectures. Proposed a Weighted Correctness Score to better evaluate reasoning quality beyond simple accuracy.",
+      "Evaluation framework benchmarking Llama, Gemma, Phi-3, and Mistral on CaseHOLD legal multiple-choice QA via Ollama. Also evaluates Legal-BERT and BERT-Double. Outputs normalized with regex parsing for cross-model comparison. Proposes a Weighted Correctness Score to capture partial reasoning quality beyond strict accuracy.",
     longDescription:
-      "This research project benchmarks the performance of modern large language models on legal multiple-choice question answering tasks. Using the CaseHOLD dataset, the system evaluates models such as Llama, Gemma, Phi-3, and Mistral by running local inference pipelines through Ollama. The evaluation framework processes model outputs, cleans inconsistent responses using regular expressions, and converts them into standardized answer formats to enable reliable cross-model comparison. The project also evaluates specialized legal NLP models, including BERT-Double and Legal-BERT, to compare domain-specific architectures against general-purpose LLMs. To address shortcomings in traditional evaluation metrics, the project proposes a Weighted Correctness Score, which accounts for partial reasoning correctness rather than relying solely on strict accuracy. The final system includes automated experiment scripts, dataset preprocessing pipelines, structured output parsing, and comparative evaluation across multiple model architectures.",
+      "This was a class research project done as a group. The motivation was pretty straightforward: LLMs are increasingly being used in legal contexts, but how well do they actually reason about law? We wanted to test that rigorously rather than just vibe-checking a chatbot.\n\nWe used the CaseHOLD benchmark, which is built from real U.S. court citations. Each question gives you a case excerpt and asks you to pick the correct legal holding from five options. It's a hard task even for humans without legal training.\n\nWe ran Llama, Gemma, Phi-3, and Mistral locally using Ollama, so nothing was sent to external APIs. Because different models format their outputs differently, we wrote regex-based parsers to normalize everything into a consistent answer token before comparing. We also benchmarked Legal-BERT and BERT-Double as domain-specific baselines. Legal-BERT is fine-tuned on legal text, and BERT-Double stacks two encoders for richer representations.\n\nThe most interesting contribution was a proposed metric called the Weighted Correctness Score. Strict accuracy treats a near-miss the same as a random guess, which feels wrong. A model that consistently identifies the right reasoning pattern but picks the wrong holding is doing something meaningfully different. The WCS weights answers by how close they were to correct, giving a better picture of actual reasoning capability.\n\nThe full framework is automated: inference scripts, preprocessing, output parsing, and cross-model comparison all run end to end.",
     githubUrl: "https://github.com/LuluLizzy8/NLP-Evaluating-Large-Language-Models-for-Legal-Q-A",
     demoUrl: "",
     year: "2024",
     status: "NLP project",
     meta: "Legal NLP",
     tech: ["Python", "PyTorch", "Hugging Face Transformers", "Ollama", "RegEx"],
-    palette: "from-[#d9dde8] via-[#eef1f7] to-[#c6d2ea]",
+    accent: "#4338ca",
   },
   {
     id: "recipe-book",
     title: "Recipe Book",
-    summary: "Recipe-focused application for organizing and exploring cooking content.",
+    summary: "Desktop recipe manager built in Java with Swing, file-based persistence, and OOP architecture.",
     shortDescription:
-      "Designed and implemented a desktop recipe management application with a graphical interface built using Java Swing. The system supports creating, editing, deleting, and searching recipes while maintaining persistent storage across sessions. The project emphasizes modular object-oriented design and event-driven GUI programming.",
+      "Java desktop application with a Swing GUI for CRUD operations on a recipe collection. Recipes store structured data: ingredients, steps, cook time, and category tags. File-based persistence across sessions. Architecture separates the data model, storage layer, and event-driven UI components into distinct classes.",
     longDescription:
-      "This project is a desktop recipe management application designed with object-oriented programming principles and implemented in Java using Swing for the graphical user interface. The application allows users to create, edit, delete, and search recipes through an intuitive GUI interface while maintaining persistent data storage across sessions. The system architecture separates responsibilities across classes representing recipes, storage management, and user interaction logic, following modular design practices. Users can manage recipe ingredients, preparation steps, and metadata such as cooking time and categories. The application demonstrates the use of Java collections, event-driven GUI programming, and file-based persistence to support CRUD operations. Emphasis was placed on maintainable code structure and usability, resulting in a responsive application capable of organizing and retrieving recipes efficiently.",
+      "This was a group project for an OOP class, a desktop app for managing a recipe collection built with Java Swing.\n\nYou can create, edit, delete, and search recipes. Each recipe stores ingredients, step-by-step instructions, cook time, and category tags. Everything gets saved to disk so your collection is there when you reopen the app.\n\nArchitecturally, I tried to keep things clean by separating the Recipe data model, the storage manager handling file I/O, and the Swing UI into distinct classes with clear responsibilities. The UI is event-driven, so instead of running top to bottom, the program just sits and waits for the user to do something: click a button, type in a field, and responds accordingly. Java collections handle in-memory search and filtering. Maven manages the build.\n\nIt's a fairly simple project, but it was a good exercise in OOP design and thinking about how to structure a real application rather than just writing scripts.",
     githubUrl: "https://github.com/LuluLizzy8/Recipe-Book",
     demoUrl: "",
     year: "2024",
     status: "App project",
     meta: "Food App",
     tech: ["Java", "Java Swing", "Maven"],
-    palette: "from-[#f3d7c3] via-[#fff0db] to-[#f5b38b]",
+    accent: "#f78c28",
   },
 ];
